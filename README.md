@@ -1,5 +1,5 @@
 # SMP (Stock Market Prediction)
 
-ADT Project
+Advanced Database Topics Project
 
 Created By: Bhardvaj Lukhi, Kuldeep Padhiyar, Shruti Saini
