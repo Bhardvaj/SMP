@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import os
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf import settings
+
+import yfinance as yf
 
 from bson.json_util import dumps
 import numpy as np 
@@ -19,7 +21,50 @@ from sklearn.metrics import mean_squared_error
 from tensorflow import keras
 from itertools import chain
 
+from .GetDataFromWeb import GetDataFromWeb
+from .CreateModelFromData import CreateModelFromData
+
 # Create your views here.
+
+# !----------------------------------------------------------------------
+def getDataFromWeb(request):
+  GetDataFromWeb(ticker = "GOOGL", table = "Prediction_google")
+  GetDataFromWeb(ticker = "TWTR", table = "Prediction_twitter")
+  GetDataFromWeb(ticker = "AAPL", table = "Prediction_apple")
+  GetDataFromWeb(ticker = "MSFT", table = "Prediction_microsoft")
+
+  return redirect('/admin/')
+# !----------------------------------------------------------------------
+
+
+# !----------------------------------------------------------------------
+def createModel(request):
+  # Code for creating a machine learning model
+  CreateModelFromData(ticker = "GOOGL", table = "Prediction_google")
+  CreateModelFromData(ticker = "TWTR", table = "Prediction_twitter")
+  CreateModelFromData(ticker = "AAPL", table = "Prediction_apple")
+  CreateModelFromData(ticker = "MSFT", table = "Prediction_microsoft")
+
+  return redirect('/admin/')
+# !----------------------------------------------------------------------
+
+
+# !----------------------------------------------------------------------
+def index(request):
+
+  google_price = yf.Ticker('GOOGL').history(period='now').filter(['Close']).iat[0,0]
+  twitter_price = yf.Ticker('TWTR').history(period='now').filter(['Close']).iat[0,0]
+  apple_price = yf.Ticker('AAPL').history(period='now').filter(['Close']).iat[0,0]
+  microsoft_price = yf.Ticker('MSFT').history(period='now').filter(['Close']).iat[0,0]
+
+  context = {
+    'google_price': round(google_price *100)/100,
+    'twitter_price': round(twitter_price*100)/100,
+    'apple_price': round(apple_price*100)/100,
+    'microsoft_price': round(microsoft_price*100)/100,
+  }
+  return render(request, 'index.html', context)
+# !----------------------------------------------------------------------
 
 # !----------------------------------------------------------------------
 def create_dataset(dataset, time_step=1): 
@@ -29,12 +74,6 @@ def create_dataset(dataset, time_step=1):
 		dataX.append(a)
 		dataY.append(dataset[i + time_step, 0])
 	return np.array(dataX), np.array(dataY)
-# !----------------------------------------------------------------------
-
-
-# !----------------------------------------------------------------------
-def index(request):
-    return render(request, 'index.html')
 # !----------------------------------------------------------------------
 
 
