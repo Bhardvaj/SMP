@@ -45,19 +45,19 @@
             </a>
           </li>
           <li class="nav-item  ">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% url 'smp:twitter' %}">
               <i class="fab fa-twitter"></i>
               <p>Twitter</p>
             </a>
           </li>
           <li class="nav-item  ">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% url 'smp:apple' %}">
               <i class="fab fa-apple"></i>
               <p>Apple</p>
             </a>
           </li>
           <li class="nav-item  ">
-            <a class="nav-link" href="#0">
+            <a class="nav-link" href="{% url 'smp:microsoft' %}">
               <i class="fab fa-microsoft"></i>
               <p>Microsoft</p>
             </a>
@@ -95,7 +95,7 @@
                     <i class="fab fa-google"></i>
                   </div>
                   <p class="card-category">Google Stock Price</p>
-                  <h3 class="card-title">400
+                  <h3 class="card-title">{{ google_price }}
                     <small>$</small>
                   </h3>
                 </div>
@@ -114,13 +114,13 @@
                     <i class="fab fa-twitter"></i>
                   </div>
                   <p class="card-category">Twitter Stock Price</p>
-                  <h3 class="card-title">500
+                  <h3 class="card-title">{{ twitter_price }}
                     <small>$</small>
                   </h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="#">See Prediction</a>
+                    <a href="{% url 'smp:twitter' %}">See Prediction</a>
                   </div>
                 </div>
               </div>
@@ -133,13 +133,13 @@
                     <i class="fab fa-apple"></i>
                   </div>
                   <p class="card-category">Apple Stock Price</p>
-                  <h3 class="card-title">100
+                  <h3 class="card-title">{{ apple_price }}
                     <small>$</small>
                   </h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="#">See Prediction</a>
+                    <a href="{% url 'smp:apple' %}">See Prediction</a>
                   </div>
                 </div>
               </div>
@@ -152,13 +152,13 @@
                     <i class="fab fa-microsoft"></i>
                   </div>
                   <p class="card-category">Microsoft Stock Price</p>
-                  <h3 class="card-title">1000
+                  <h3 class="card-title">{{ microsoft_price }}
                     <small>$</small>
                   </h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <a href="#">See Prediction</a>
+                    <a href="{% url 'smp:microsoft' %}">See Prediction</a>
                   </div>
                 </div>
               </div>
